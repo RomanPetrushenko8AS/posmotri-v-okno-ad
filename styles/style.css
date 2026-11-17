@@ -49,3 +49,337 @@ ol {
 .custom-scrollbar::-webkit-scrollbar-thumb {
   background-color: #D9D9D9;
 }
+
+/* Проверка по чек-листу: переменные вместо повторяющихся цветов
+   (#545050 был в шагах 3, 5 и 6, #1b1919 в шаге 4) */
+:root {
+  --color-accent: #545050;
+  --color-bg: #1b1919;
+}
+
+/* Шаг 4: скрытие лейблов и нативных чекбоксов.
+   Раньше этот класс был ещё в шаге 1, теперь только версия из задания шага 4 */
+.visually-hidden {
+  position: absolute;
+  inline-size: 1px;
+  block-size: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+/* Шаг 1, п. 1: флекс для .page, центрирование .content по обеим осям */
+.page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Шаг 1, п. 2–3: элементы в строку, прижаты к низу, ширина и отступ между колонками */
+.content {
+  display: flex;
+  align-items: flex-end;
+  gap: 32px;
+  inline-size: 1140px;
+}
+
+/* Левая колонка: видео и форма.
+   Шаг 1: ширина колонки, чтобы она не сжималась */
+.result {
+  flex-shrink: 0;
+  inline-size: 710px;
+}
+
+/* Шаг 2, п. 1: размеры и отступ снизу.
+   Шаг 8 (и ранее шаг 1): position: relative, чтобы прелоадер и ошибка встали внутрь */
+.result__video-container {
+  position: relative;
+  block-size: 386px;
+  margin-block-end: 18px;
+}
+
+/* Шаг 2, п. 2: видео на весь контейнер, object-fit */
+.result__video {
+  display: block;
+  inline-size: 100%;
+  block-size: 100%;
+  object-fit: cover;
+}
+
+/* Шаг 1, п. 4: элементы формы в строку, прижаты к верху, свободное место распределено */
+.search-form {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+/* Шаг 4: сброс рамки у fieldset */
+.search-form__fieldset {
+  border: 0;
+}
+
+/* Шаг 3, п. 1: заголовки «Город» и «Время суток» */
+.search-form__fieldset-title {
+  margin-block-end: 4px;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 1.2;
+}
+
+/* Шаг 4: обёртка поля и чекбокса (строка, центрирование, fit-content, gap) */
+.search-form__label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  inline-size: fit-content;
+}
+
+/* Шаг 4, факультативно: рамка фокуса на лейбле только для :focus-visible */
+.search-form__label:has(:focus-visible) {
+  outline: 1px solid #fff;
+  outline-offset: 1px;
+}
+
+/* Шаг 4: текстовое поле (рамка сверху и снизу, цвета, appearance: none) */
+.search-form__textfield {
+  inline-size: 225px;
+  block-size: 26px;
+  margin: 0;
+  padding: 0;
+  color: #fff;
+  font-family: inherit;
+  font-size: 18px;
+  background-color: var(--color-bg);
+  border: 1px solid #fff;
+  border-inline: 0;
+  border-radius: 0;
+  outline: none;
+  appearance: none;
+}
+
+/* Шаг 4: цвет подсказки */
+.search-form__textfield::placeholder {
+  color: rgb(255 255 255 / 0.7);
+}
+
+/* Шаг 4: чекбоксы в линию */
+.search-form__checkbox-list {
+  display: flex;
+  gap: 16px;
+}
+
+/* Шаг 7: курсор-«рука» у лейблов чекбоксов.
+   Селектор вложенный, чтобы курсор не менялся у поля «Город» */
+.search-form__checkbox-list .search-form__label {
+  cursor: pointer;
+}
+
+/* Шаг 4: подчёркивание текста при наведении на любую точку лейбла чекбокса */
+.search-form__checkbox-list .search-form__label:hover .search-form__label-text {
+  text-decoration: underline;
+}
+
+/* Шаг 4: псевдочекбокс (размер, рамка, внутренний отступ 1px) */
+.search-form__pseudo-checkbox {
+  inline-size: 18px;
+  block-size: 18px;
+  padding: 1px;
+  border: 1px solid #fff;
+}
+
+/* Шаг 4: закрашенный квадрат внутри, по умолчанию прозрачный */
+.search-form__pseudo-checkbox::after {
+  content: '';
+  display: block;
+  inline-size: 100%;
+  block-size: 100%;
+  background-color: #fff;
+  opacity: 0;
+}
+
+/* Шаг 4: квадрат становится видимым, когда чекбокс выбран */
+.search-form__checkbox:checked + .search-form__pseudo-checkbox::after {
+  opacity: 1;
+}
+
+/* Шаг 5, п. 1: общие стили кнопок.
+   Шаг 7: cursor: pointer */
+.button {
+  padding: 0;
+  color: #fff;
+  font-family: 'Fira Sans Condensed', sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  background-color: transparent;
+  border: 1px solid #fff;
+  border-radius: 0;
+  cursor: pointer;
+}
+
+/* Шаг 5: подчёркивание текста при наведении */
+.button:hover {
+  text-decoration: underline;
+}
+
+/* Шаг 5: цвет нажатой кнопки */
+.button:active {
+  background-color: var(--color-accent);
+}
+
+/* Шаг 5, факультативно: сброс обводки в :focus */
+.button:focus {
+  outline: none;
+}
+
+/* Шаг 5, факультативно: обводка только в :focus-visible */
+.button:focus-visible {
+  outline: 1px solid #fff;
+  outline-offset: 2px;
+}
+
+/* Шаг 5, п. 3: кнопка «Найти», размер и прижатие вниз */
+.search-form__submit-button {
+  inline-size: 224px;
+  block-size: 33px;
+  align-self: flex-end;
+}
+
+/* Шаг 5, п. 4: кнопка «Показать ещё», размер на всю ширину контейнера.
+   flex-shrink: 0 не даёт ей сжаться в контейнере со скроллом */
+.more-button {
+  flex-shrink: 0;
+  inline-size: 100%;
+  block-size: 33px;
+}
+
+/* Шаг 1, п. 6: правая колонка на всю доступную ширину и высоту,
+   gap между заголовком и карточками */
+.content__details {
+  display: flex;
+  flex-direction: column;
+  min-inline-size: 0;   /* Защита flex-элемента от распирания контентом */
+  inline-size: 398px;
+  flex-grow: 1;
+  align-self: stretch;
+  gap: 26px;
+}
+
+/* Шаг 3, п. 2: главный заголовок */
+.title {
+  font-family: Oswald, sans-serif;
+  font-weight: 700;
+  font-size: 75px;
+  line-height: 0.93;
+  text-transform: uppercase;
+}
+
+/* Шаг 3, п. 2: серое «ПО-» в заголовке */
+.content__accent {
+  color: var(--color-accent);
+}
+
+/* Шаг 1, п. 5: жёсткая высота и скролл при переполнении.
+   Шаг 2, п. 4: gap между последней карточкой и кнопкой «Показать ещё».
+   Шаг 8: position: relative для прелоадера */
+.content__list-container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 26px;
+  inline-size: 100%;
+  block-size: 298px;
+  overflow-y: auto;
+}
+
+/* Шаг 2, п. 3: отступы между карточками */
+.content__list {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  inline-size: 100%;
+}
+
+/* Шаг 6: боковые отступы, чтобы обводка фокуса не прилипала к карточке */
+.content__list-item {
+  padding-inline: 3px;
+}
+
+/* Шаг 3, п. 3: ссылка без подчёркивания, цвет наследуется.
+   display: block нужен для фона (шаг 6).
+   Шаг 7: cursor: pointer */
+.content__card-link {
+  display: block;
+  color: inherit;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/* Шаг 6: фон текущей карточки и карточки в момент нажатия */
+.content__card-link_current,
+.content__card-link:active {
+  background-color: var(--color-accent);
+}
+
+/* Шаг 6: подчёркивание текста карточки при наведении */
+.content__card-link:hover .content__video-card-title,
+.content__card-link:hover .content__video-card-description {
+  text-decoration: underline;
+}
+
+/* Шаг 6: сброс обводки в :focus */
+.content__card-link:focus {
+  outline: none;
+}
+
+/* Шаг 6: обводка только в :focus-visible */
+.content__card-link:focus-visible {
+  outline: 1px solid #fff;
+}
+
+/* Шаг 2, п. 5: элементы карточки в строку, прижаты к верху */
+.content__video-card {
+  display: flex;
+  align-items: flex-start;
+  inline-size: 100%
+}
+
+/* Шаг 2, п. 7: текст занимает всё место, не занятое картинкой.
+   Шаг 3: min-inline-size: 0, без него многоточие у названия не сработает */
+.content__video-card-description-container {
+  flex-grow: 1;
+  min-inline-size: 0;
+}
+
+/* Шаг 3, п. 4: название города, одна строка, лишнее заменяется на «…» */
+.content__video-card-title {
+  overflow: hidden;
+  font-family: Oswald, sans-serif;
+  font-weight: 700;
+  font-size: 30px;
+  line-height: 1;
+  text-transform: uppercase;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+/* Шаг 3, п. 5: описание, обрезка по строкам через line-clamp.
+   Проверка по чек-листу: line-height заменён с 16px на 1 (относительная единица) */
+.content__video-card-description {
+  display: -webkit-box;
+  overflow: hidden;
+  font-size: 16px;
+  line-height: 1;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 4;
+  line-clamp: 4;
+}
+
+/* Шаг 2, п. 6: миниатюра, высота, минимальная ширина, object-fit и object-position */
+.content__video-card-thumbnail {
+  min-inline-size: 194px;
+  block-size: 103px;
+  object-fit: cover;
+  object-position: center;
+}
+
